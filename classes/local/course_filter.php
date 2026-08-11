@@ -27,7 +27,6 @@ namespace local_courseavailabilitydelay\local;
 defined('MOODLE_INTERNAL') || die();
 
 class course_filter {
-
     /**
      * Determine whether a given user can see a given course right now.
      * Returns true = visible, false = still delayed.

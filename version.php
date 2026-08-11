@@ -39,8 +39,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_courseavailabilitydelay';
-$plugin->version   = 2026072300211;
+$plugin->version   = 2026072300212;
 $plugin->requires  = 2022041900;
 $plugin->supported = [400, 500];
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0.7';
+$plugin->release   = '1.0.8';

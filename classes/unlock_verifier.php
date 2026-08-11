@@ -28,7 +28,6 @@ namespace local_courseavailabilitydelay;
 defined('MOODLE_INTERNAL') || die();
 
 class unlock_verifier {
-
     const PLUGIN_ID = 'courseavailabilitydelay';
     const CREDITS_REQUIRED = 1000;
     const API_URL = 'https://lms-labs.com/api/plugin-unlock/verify';
