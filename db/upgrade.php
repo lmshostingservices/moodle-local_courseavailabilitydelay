@@ -15,11 +15,11 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Upgrade steps for local_courseavailabilitydelay.
+ * Course Availability Delay — upgrade steps.
  *
  * @package    local_courseavailabilitydelay
  * @copyright  2026 LMS-Labs
- * @license    http://www.gnu.org/licenses/gpl-3.0.html GNU GPL v3 or later
+ * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
@@ -31,8 +31,35 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool
  */
 function xmldb_local_courseavailabilitydelay_upgrade($oldversion) {
+
+    // v1.0.1: FIX-CAD-NUMERIC-VERSION — Corrects the 10-digit $plugin->version (2026040901)
+    //   used in the initial v1.0.0 release to the mandatory YYYYMMDDXX format.
+    //   Creates db/upgrade.php with savepoint. No functional or DB schema changes.
+    if ($oldversion < 2026040900) {
+        upgrade_plugin_savepoint(true, 2026040900, 'local', 'courseavailabilitydelay');
+    }
+
+    // v1.0.3: FIX-CAD-003 — Switched unlock_verifier from raw PHP curl_init() to Moodle's
+    //   \curl class (filelib.php). Raw cURL bypasses Moodle's SSL certificate bundle causing
+    //   verify API calls to fail silently on most Moodle hosting environments.
+    //   No DB schema changes.
+    if ($oldversion < 2026041000) {
+        upgrade_plugin_savepoint(true, 2026041000, 'local', 'courseavailabilitydelay');
+    }
+
+    // v1.0.4: FIX-CAD-LANG-CAPABILITIES — Added missing capability language strings
+    //   'courseavailabilitydelay:manage' and 'courseavailabilitydelay:viewreports'.
+    //   Without these strings Moodle's capabilities admin page showed raw
+    //   [[key]] placeholders instead of readable labels. No DB schema changes.
+    if ($oldversion < 2026042400) {
+        upgrade_plugin_savepoint(true, 2026042400, 'local', 'courseavailabilitydelay');
+    }
+
+    // v1.0.5–v1.0.8: FIX-API-DOMAIN series — Updated all API endpoint URLs to the correct
+    //   production domain. No DB schema changes.
     if ($oldversion < 2026072300) {
         upgrade_plugin_savepoint(true, 2026072300, 'local', 'courseavailabilitydelay');
     }
+
     return true;
 }
