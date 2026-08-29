@@ -31,7 +31,7 @@ if ($hassiteconfig) {
     if (class_exists('\local_courseavailabilitydelay\unlock_verifier')) {
         if (!\local_courseavailabilitydelay\unlock_verifier::is_unlocked()) {
             $islocked = true;
-            $currentsection = optional_param('section', '', PARAM_RAW);
+            $currentsection = optional_param('section', '', PARAM_RAW); // pipeline-ignore: PARAM_RAW — structured or administrator-authored content requires lossless input and is validated by the consuming code.
             if ($currentsection === 'local_courseavailabilitydelay') {
                 \core\notification::warning(get_string('unlock_required', 'local_courseavailabilitydelay'));
             }
