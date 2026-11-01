@@ -39,8 +39,8 @@
 defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_courseavailabilitydelay';
-$plugin->version   = 2026082901;
+$plugin->version   = 2026110200;
 $plugin->requires  = 2022041900;
 $plugin->supported = [400, 500];
 $plugin->maturity  = MATURITY_STABLE;
-$plugin->release   = '1.0.9'; // RELEASE RECOVERY: Republished the reviewed authoritative source under a new immutable tag because the historical tag contained a different source tree. No functional changes.
+$plugin->release   = '1.0.10';

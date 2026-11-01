@@ -1,3 +1,8 @@
+## [v1.0.10] - 2026-11-02
+
+### Fixed
+- Run unlock verification only when this plugin's own settings page is opened.
+
 ## [v1.0.9] - 2026-08-29
 
 ### Changed

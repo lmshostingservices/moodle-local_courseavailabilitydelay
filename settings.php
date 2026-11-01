@@ -26,15 +26,13 @@ defined('MOODLE_INTERNAL') || die();
 
 if ($hassiteconfig) {
 
-    // Show unlock warning if the plugin is not yet activated.
-    $islocked = false;
-    if (class_exists('\local_courseavailabilitydelay\unlock_verifier')) {
+    // Moodle loads plugin settings while building the wider administration tree.
+    // Keep the network-backed unlock check on this plugin's own settings page.
+    $currentsection = optional_param('section', '', PARAM_ALPHAEXT);
+    if ($currentsection === 'local_courseavailabilitydelay' &&
+            class_exists('\local_courseavailabilitydelay\unlock_verifier')) {
         if (!\local_courseavailabilitydelay\unlock_verifier::is_unlocked()) {
-            $islocked = true;
-            $currentsection = optional_param('section', '', PARAM_RAW); // pipeline-ignore: PARAM_RAW — structured or administrator-authored content requires lossless input and is validated by the consuming code.
-            if ($currentsection === 'local_courseavailabilitydelay') {
-                \core\notification::warning(get_string('unlock_required', 'local_courseavailabilitydelay'));
-            }
+            \core\notification::warning(get_string('unlock_required', 'local_courseavailabilitydelay'));
         }
     }
 
